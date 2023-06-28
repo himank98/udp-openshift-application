@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udp-client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: udp-client
+  template:
+    metadata:
+      labels:
+        name: udp-client 
+    spec:
+      containers:
+      - name: udp-client
+        image: quay.io/rhn_support_hchaturv/udp-client
+        imagePullPolicy: Always
+        env:
+        - name: SERVER_ADDRESS
+          value: "172.30.171.251"  #ClusterIP for server deployment
